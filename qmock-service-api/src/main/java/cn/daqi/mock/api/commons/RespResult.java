@@ -1,5 +1,6 @@
 package cn.daqi.mock.api.commons;
 
+import com.github.pagehelper.PageInfo;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -21,13 +22,16 @@ public class RespResult implements Serializable {
     private Object data;
 
     // 错误编码
-    private Integer errorCode;
+    private int errorCode;
 
     // 错误信息
     private String errorMessage;
 
     // 提示类型： 0 silent; 1 message.warn; 2 message.error; 4 notification; 9 page
-    private Integer showType = 0;
+    private int showType = 0;
+
+    // 分页时候用的总数
+    private long total;
 
     // 枚举通用赋值方法
     public void setResultCode(RespCode respCode){
@@ -49,6 +53,15 @@ public class RespResult implements Serializable {
         RespResult respResult = new RespResult();
         respResult.setResultCode(RespCode.SUCCESS);
         respResult.setData(data);
+        return respResult;
+    }
+
+    // 分页数据成功响应
+    public static RespResult success(PageInfo pageData) {
+        RespResult respResult = new RespResult();
+        respResult.setResultCode(RespCode.SUCCESS);
+        respResult.setData(pageData.getList());
+        respResult.setTotal(pageData.getTotal());
         return respResult;
     }
 

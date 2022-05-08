@@ -13,6 +13,14 @@ spring:
 mybatis:
   type-aliases-package: cn.daqi.mock.api.entity # 指定实体类所在包
   mapper-locations: classpath:mapper/*.xml # 指定mapper xml 所在位置
+
   configuration:
     map-underscore-to-camel-case: true  # 数据库表字段自动转驼峰命名 如：user_name -> userName
+
+## 数据库分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
 
