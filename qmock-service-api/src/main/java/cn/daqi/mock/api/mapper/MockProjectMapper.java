@@ -18,7 +18,7 @@ public interface MockProjectMapper {
      * @return Object
      * @desc 查询项目表多条数据
      */
-    @Select("SELECT * FROM mock_project ORDER BY mp_update_date DESC")
+    @Select("SELECT * FROM mock_project WHERE mp_state=0 ORDER BY mp_update_date DESC")
     @Results(id = "projectMap", value = {
             @Result(column = "mp_id", property = "id"),
             @Result(column = "mp_name", property = "name"),
@@ -39,7 +39,7 @@ public interface MockProjectMapper {
      * @return List<MockProjectEntity>
      * @desc 数据库项目表，根据id查询project详细信息
      */
-    @Select("SELECT * FROM mock_project WHERE mp_name LIKE CONCAT(CONCAT('%',#{name},'%'))")
+    @Select("SELECT * FROM mock_project WHERE  mp_state=0 AND mp_name LIKE CONCAT(CONCAT('%',#{name},'%'))")
     @ResultMap("projectMap")
     List<MockProjectEntity> searchMockProject(String name);
 
@@ -71,4 +71,12 @@ public interface MockProjectMapper {
     @Update({"UPDATE mock_project SET mp_name=#{name},mp_desc=#{desc},mp_type=#{type},mp_owner=#{owner},mp_update_user=#{updateUser},mp_update_date=NOW() WHERE mp_id=#{id}"})
     @ResultMap("projectMap")
     int updateProject(MockProjectEntity projectEntity);
+
+    /**
+     * 删除项目，软删除标记is_del=1
+     * @param id
+     * @return 影响数量 更新成功默认1
+     */
+    @Update({"UPDATE mock_project SET mp_state=1 WHERE mp_id=#{id}"})
+    Boolean removeProject(Integer id);
 }

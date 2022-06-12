@@ -13,6 +13,10 @@ public enum RespCode {
      * 提示类型： 0 静默silent; 1 警告message.warn; 2 错误message.error; 4 消息notification; 9 跳转page
      * */
     SUCCESS(true, 2000, "成功", 0),
+    DATA_SAVE_ERROR(true, 2100, "数据保存失败", 0),
+    DATA_ADD_ERROR(true, 2101, "数据新增失败", 0),
+    DATA_UPDATE_ERROR(true, 2101, "数据修改失败", 0),
+    DATA_REMOVE_ERROR(true, 2102, "数据删除失败", 0),
     SYSTEM_ERROR(false, 5000, "系统繁忙，请稍后重试", 2),
 
     /* 参数错误 1001~1999 */

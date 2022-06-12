@@ -16,4 +16,6 @@ public interface MockProjectService {
     RespResult searchMockProject(String name, int current, int pageSize);
 
     RespResult saveMockProject(MockProjectRequest mockProject);
+
+    RespResult removeMockProject(Integer id);
 }

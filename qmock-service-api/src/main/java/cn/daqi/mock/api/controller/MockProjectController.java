@@ -4,11 +4,10 @@ import cn.daqi.mock.api.commons.RespCode;
 import cn.daqi.mock.api.commons.RespResult;
 import cn.daqi.mock.api.entity.requests.MockProjectRequest;
 import cn.daqi.mock.api.service.MockProjectService;
-import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 
 /**
  * @ Author: Zhang Qi
@@ -45,5 +44,10 @@ public class MockProjectController {
             System.out.println(e);
         }
         return RespResult.failure(RespCode.SYSTEM_ERROR);
+    }
+
+    @PostMapping(value = "/project/remove")
+    public RespResult removeProject(@Param("id") Integer id){
+        return mockProjectService.removeMockProject(id);
     }
 }

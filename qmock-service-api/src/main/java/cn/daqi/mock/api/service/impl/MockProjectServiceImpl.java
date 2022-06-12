@@ -1,5 +1,6 @@
 package cn.daqi.mock.api.service.impl;
 
+import cn.daqi.mock.api.commons.RespCode;
 import cn.daqi.mock.api.commons.RespResult;
 import cn.daqi.mock.api.entity.MockProjectEntity;
 import cn.daqi.mock.api.entity.requests.MockProjectRequest;
@@ -78,5 +79,15 @@ public class MockProjectServiceImpl implements MockProjectService {
         }
 
         return RespResult.success();
+    }
+
+    @Override
+    public RespResult removeMockProject(Integer id) {
+
+        Boolean markResult = mockProjectMapper.removeProject(id);
+        if (markResult){
+            return RespResult.success();
+        }
+        return RespResult.failure(RespCode.DATA_REMOVE_ERROR);
     }
 }
