@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.*;
 @SpringBootConfiguration
 public class QMockAdapter implements WebMvcConfigurer {
 
+
     @Bean
     public QMockInterceptor mockInterceptor(){
         return new QMockInterceptor();
@@ -18,7 +19,8 @@ public class QMockAdapter implements WebMvcConfigurer {
         // excludePathPatterns 用户排除拦截
         // RequestInterceptor()为自己定义的拦截器
 //        registry.addInterceptor(new QMockInterceptor()).excludePathPatterns("/index.html","/static/**","/qmock/**");
-        registry.addInterceptor(new QMockInterceptor()).addPathPatterns("/**");
+//        registry.addInterceptor(new QMockInterceptor()).addPathPatterns("/**"); -> 错误用法导致@Autowired为null
+        registry.addInterceptor(mockInterceptor()).addPathPatterns("/**");
     }
 
     /* 视图跳转控制器 */
