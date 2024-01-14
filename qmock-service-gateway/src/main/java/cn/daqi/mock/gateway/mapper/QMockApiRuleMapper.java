@@ -1,6 +1,7 @@
 package cn.daqi.mock.gateway.mapper;
 
 import cn.daqi.mock.gateway.entity.QMockApiRuleEntity;
+import cn.daqi.mock.gateway.handler.JSONArrayTypeHandler;
 import cn.daqi.mock.gateway.handler.JSONObjectTypeHandler;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.type.JdbcType;
@@ -23,7 +24,7 @@ public interface QMockApiRuleMapper {
         @Result(column = "rule_title", property = "title"),
         @Result(column = "rule_type", property = "type"),
         @Result(column = "rule_enable", property = "enable"),
-        @Result(column = "rule_request_filter", property = "reqFilter", jdbcType =  JdbcType.VARCHAR, typeHandler = JSONObjectTypeHandler.class),
+        @Result(column = "rule_request_filter", property = "reqFilter", jdbcType =  JdbcType.VARCHAR, typeHandler = JSONArrayTypeHandler.class),
         @Result(column = "rule_response_body", property = "resBody", jdbcType =  JdbcType.VARCHAR, typeHandler = JSONObjectTypeHandler.class),
         @Result(column = "rule_response_code",property = "resCode"),
         @Result(column = "rule_shell", property = "shell"),

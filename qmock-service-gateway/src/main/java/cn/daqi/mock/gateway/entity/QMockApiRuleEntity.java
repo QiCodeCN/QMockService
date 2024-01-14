@@ -22,8 +22,8 @@ public class QMockApiRuleEntity extends QBaseEntity implements Serializable {
     private Long id;
     private Long apiId;
     private String title;
-    private int enable;
     private String type;
+    private int enable;
     private JSONArray reqFilter;
     private JSONObject resBody;
     private int resCode = 200;

@@ -56,7 +56,8 @@ public class QMockInterceptor implements HandlerInterceptor{
                 try {
 
                     if (request.getParameterMap().size()!=0) {
-                        reqParamsOrBody = QMockRuleUtil.getJsonObjcetByQueryUrl(URLDecoder.decode(request.getQueryString(),"utf-8"));
+                        String paramsStr = URLDecoder.decode(request.getQueryString(),"utf-8");
+                        reqParamsOrBody = QMockRuleUtil.getJsonObjcetByQueryUrl(paramsStr);
                     }
                     resResult = QMockRuleUtil.matchFilter(mockApiEntity,mockApiRuleEntities,reqParamsOrBody);
                 }

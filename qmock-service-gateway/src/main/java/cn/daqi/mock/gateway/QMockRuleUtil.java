@@ -105,14 +105,14 @@ public class QMockRuleUtil {
                 Boolean assertResult = false;
                 for(int i=0; i< filters.size(); i++) {
                     String key = filters.getJSONObject(i).getString("key");
-                    Boolean jsParamsHasKey = reqParamsOrBody.containsKey(key);
-                    Object jj = null;
-                    if(jsParamsHasKey) {
-                        jj = reqParamsOrBody.get(key);
-                    }
-                    Object value = filters.getJSONObject(i).get("value");
-
-                    Boolean ab = reqParamsOrBody.get(key).equals(filters.getJSONObject(i).get("value"));
+//                    Boolean jsParamsHasKey = reqParamsOrBody.containsKey(key);
+//                    Object jj = null;
+//                    if(jsParamsHasKey) {
+//                        jj = reqParamsOrBody.get(key);
+//                    }
+//                    Object value = filters.getJSONObject(i).get("value");
+//
+//                    Boolean ab = reqParamsOrBody.get(key).equals(filters.getJSONObject(i).get("value"));
 
                     if(reqParamsOrBody.containsKey(key) && reqParamsOrBody.get(key).toString().equals(filters.getJSONObject(i).get("value"))) {
                         assertResult = true;
