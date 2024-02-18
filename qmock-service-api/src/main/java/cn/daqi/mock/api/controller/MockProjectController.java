@@ -27,7 +27,7 @@ public class MockProjectController {
     }
 
     @RequestMapping(value = "/project/search", method = RequestMethod.GET)
-    public RespResult searchProject(@RequestParam(value = "name") String name, int current, int pageSize) {
+    public RespResult searchProject(String name, int current, int pageSize) {
         return mockProjectService.searchMockProject(name, current, pageSize);
     }
 

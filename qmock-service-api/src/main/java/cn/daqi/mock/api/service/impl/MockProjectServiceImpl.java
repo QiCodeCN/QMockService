@@ -46,7 +46,7 @@ public class MockProjectServiceImpl implements MockProjectService {
         List<MockProjectEntity> mockProjectEntityList;
         PageHelper.startPage(current, pageSize);
 
-        if (name.isEmpty()){
+        if (name==null || name.isEmpty()){
             mockProjectEntityList = mockProjectMapper.selectMockProject();
         } else{
             mockProjectEntityList = mockProjectMapper.searchMockProject(name);

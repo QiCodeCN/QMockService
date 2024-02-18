@@ -30,4 +30,16 @@ hs_err_pid*
 
 ### qmock-server-api
 qmock-service-api/.mvn
+qmock-service-api/.idea
+qmock-service-api/target
+
+### qmock-service-gateway
 qmock-service-gateway/.mvn
+qmock-service-gateway/.idea
+qmock-service-gateway/target
+
+### qmock-web-antdpro
+qmock-web-antdpro/.idea
+qmock-web-antdpro/node_modules
+qmock-web-antdpro/src/.umi
+qmock-web-antdpro/dist
