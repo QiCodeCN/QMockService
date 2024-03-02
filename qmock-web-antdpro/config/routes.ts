@@ -29,10 +29,16 @@ export default [
     component: './Welcome',
   },
   {
-    path: 'project',
+    path: '/project',
     name: '项目管理',
     icon: 'GroupOutlined',
     component: './Project',
+  },
+  {
+    path: '/project/interface',
+    name: '接口管理',
+    hideInMenu: true,
+    component: './Interface/index.tsx',
   },
   // {
   //   path: '/admin',

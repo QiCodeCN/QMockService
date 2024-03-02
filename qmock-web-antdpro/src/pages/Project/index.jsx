@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'umi'
 
 // 引入组件依赖
 import { Button, Space, Table, Modal, Form, Input, message,Pagination,Tag } from "antd";
@@ -11,6 +12,7 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 // 导入sever接口请求方法
 import { getProductList, searchProducts, removeProduct } from "@/services/ant-design-pro/project.js";
 import UpsertProject from "@/pages/Project/components/UpsertProject";
+import route from "../../../mock/route";
 const Project = () => {
   // 获取全部项目数据
   // const {data:useProjectList, error, loading, run: reloadProjectList} = useRequest(getProductList);
@@ -54,8 +56,9 @@ const Project = () => {
     {dataIndex:"option",title:"操作",
       render: (text, record) => (
         <Space>
-          <a onClick={()=>editAction(record)}>编辑</a>
-          <a onClick={()=>deleteConfirmWithPromise(record)}>删除</a>
+          <Link to={'/project/interface'}>接口管理</Link>
+          <a onClick={() => editAction(record)}>编辑</a>
+          <a onClick={() => deleteConfirmWithPromise(record)}>删除</a>
         </Space>
       ),
     },
