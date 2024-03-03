@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.daqi.mock.api.mapper.MockInterfaceMapper">
+    <resultMap type="cn.daqi.mock.api.entity.MockInterfaceEntity" id="InterfaceResponseMap">
+        <result property="id" column="api_id" jdbcType="INTEGER"/>
+        <result property="tagId" column="api_tag_id" jdbcType="INTEGER"/>
+        <result property="projectId" column="api_project_id" jdbcType="INTEGER"/>
+        <result property="title" column="api_title" jdbcType="VARCHAR"/>
+        <result property="method" column="api_method" jdbcType="VARCHAR"/>
+        <result property="path" column="api_path" jdbcType="VARCHAR"/>
+        <result property="enable" column="api_enable" jdbcType="INTEGER"/>
+        <result property="desc" column="api_desc" jdbcType="VARCHAR"/>
+        <result property="responseCode" column="responseCode" jdbcType="INTEGER"/>
+        <result property="responseDefault" column="responseDefault" jdbcType="VARCHAR"/>
+        <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="selectMockInterface" resultMap="InterfaceResponseMap" parameterType="cn.daqi.mock.api.entity.requests.InterfaceSearchRequest">
+        select * from mock_api
+        <where>
+            api_project_id=#{projectId} and api_enable != 3
+            <if test="tagId != null and tagId != ''">
+                and api_tag_id = #{tagId}
+            </if>
+            <if test="title != null and title != ''">
+                and api_title like CONCAT('%',#{title},'%')
+            </if>
+            <if test="method != null and method != ''">
+                and api_method = #{method}
+            </if>
+            <if test="path != null and path != ''">
+                and api_path = #{path}
+            </if>
+            <if test="enable != null and enable != ''">
+                and api_enable = #{enable}
+            </if>
+        </where>
+    </select>
+</mapper>

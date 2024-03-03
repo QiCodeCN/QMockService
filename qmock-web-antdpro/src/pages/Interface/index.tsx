@@ -1,6 +1,8 @@
 // @ts-ignore
 import React from "react";
+import { useSearchParams } from 'umi'
 import { ProTable, ProColumns} from '@ant-design/pro-components';
+import { searchInterface } from '@/services/ant-design-pro/interface';
 
 type apiItem ={
   name: string,
@@ -9,10 +11,29 @@ type apiItem ={
   desc: string
 };
 
+export const waitTimePromise = async (time: number = 100) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(true);
+    }, time);
+  });
+};
+
+export const waitTime = async (time: number = 100) => {
+  await waitTimePromise(time);
+};
+
+
+
+const fetchApiData = async (params, sort, filter) => {
+  const reps = await searchInterface(params);
+  return reps;
+};
+
 const apiolumns: ProColumns<apiItem>[] = [
   {
     title: '标题名称',
-    dataIndex: 'name',
+    dataIndex: 'title',
     ellipsis: true,
   },
   {
@@ -38,9 +59,12 @@ const apiolumns: ProColumns<apiItem>[] = [
   },
 ]
 export default () => {
+    const [searchParams, setSearchParams] = useSearchParams();
     return (
-      <ProTable<apiItem>
+      <ProTable
+        params={{ projectId: searchParams.get('id') }}
         columns={apiolumns}
+        request={fetchApiData}
       >
 
       </ProTable>
