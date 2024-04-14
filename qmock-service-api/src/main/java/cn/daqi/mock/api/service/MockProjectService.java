@@ -4,9 +4,10 @@ import cn.daqi.mock.api.commons.RespResult;
 import cn.daqi.mock.api.entity.requests.MockProjectRequest;
 
 /**
- * @ Author: Zhang Qi
- * @ Copyright: 博客&公众号《大奇测试开发》
- * @ Describe: 项目管理服务对外interface
+ * @ 作  者: Qi
+ * @ 公众号: 非典型性程序员
+ * @ 博 客：https://blog.csdn.net/zyueqi1987
+ * @ 描 述: 项目服务类
  */
 
 public interface MockProjectService {

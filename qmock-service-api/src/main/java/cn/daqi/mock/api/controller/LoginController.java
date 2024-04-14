@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @ Author: Zhang Qi
- * @ Copyright: 博客&公众号《大奇测试开发》
+ * @ Copyright: 公众号《非典型性程序员》
  * @ Describe: 登录接口API
  */
 @RestController

@@ -23,8 +23,8 @@
     <select id="selectMockInterface" resultMap="InterfaceResponseMap" parameterType="cn.daqi.mock.api.entity.requests.InterfaceSearchRequest">
         select * from mock_api
         <where>
-            api_project_id=#{projectId} and api_enable != 3
-            <if test="tagId != null and tagId != ''">
+            api_project_id=#{projectId} and api_enable != 2
+            <if test="tagId != null and tagId != '' and tagId != 0">
                 and api_tag_id = #{tagId}
             </if>
             <if test="title != null and title != ''">
