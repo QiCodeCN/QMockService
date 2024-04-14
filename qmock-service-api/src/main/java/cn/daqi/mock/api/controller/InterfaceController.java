@@ -6,6 +6,11 @@ import cn.daqi.mock.api.service.MockInterfaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * @ Author: Zhang Qi
+ * @ Copyright: 公众号《非典型性程序员》
+ * @ Describe: 接口管理API
+ */
 @RestController
 @RequestMapping("/api/mock")
 public class InterfaceController {

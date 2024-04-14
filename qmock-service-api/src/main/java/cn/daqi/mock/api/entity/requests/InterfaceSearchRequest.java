@@ -1,7 +1,6 @@
 package cn.daqi.mock.api.entity.requests;
 
 import lombok.Data;
-import lombok.NonNull;
 
 @Data
 public class InterfaceSearchRequest {
