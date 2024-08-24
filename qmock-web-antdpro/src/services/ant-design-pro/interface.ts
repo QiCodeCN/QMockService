@@ -48,3 +48,11 @@ export async function removeTag(tagId: Number) {
     params: {tagId: tagId}
   });
 }
+
+export async function saveApi(data) {
+  return request('/api/mock/interface/upsert', {
+    method: 'POST',
+    data
+  });
+}
+

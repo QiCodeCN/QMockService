@@ -1,13 +1,14 @@
-// @ts-ignore
 import React, {useRef, useState} from "react";
 import { useSearchParams } from 'umi'
-import {Tree, Button, message, Modal} from 'antd';
+import {Tree, Button, message, Modal, Space} from 'antd';
 const { confirm, info } = Modal;
 import {PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined} from '@ant-design/icons';
 import { ProTable, ProColumns, ProCard} from '@ant-design/pro-components';
 import { searchInterface, getTagList,getTagInfo, removeTag } from '@/services/ant-design-pro/interface';
 import UpsertTag from "@/pages/Interface/components/UpsertTag";
+import UpsertApi from "@/pages/Interface/components/UpsertApi";
 import {ActionType} from "@ant-design/pro-table/lib";
+import {Link} from "@@/exports";
 
 type apiItem ={
   name: string,
@@ -21,6 +22,7 @@ const Tag = () => {
   const refTable = useRef<ActionType>();
   const [tableData, setTableData] = useState([]);
   const [treeData, setTreeData] = useState([]);
+  const [tagData, setTagData] = useState([]);
   const [treeSelect, setTreeSelect] = useState(0);
   const [treeSelectInfo, setTreeSelectInfo] = useState({});
   const [searchParams, setSearchParams] = useSearchParams();
@@ -30,13 +32,21 @@ const Tag = () => {
   const [upsertVisible, setUpsertVisible] = useState(false);
   const [upsertAction, setUpsertAction] = useState('ADD');
 
+  const [apiAction, setApiAction] = useState('ADD');
+  const [apiVisible, setApiVisible] = useState(false);
+  const [apiRecord, setApiRecord] = useState({});
+
   const fetchApiData = async (params, sort, filter) => {
     const repsTag = await getTagList();
     var treeDataTemp: any[] = []
+    var tagDataTemp: any[] = []
     repsTag?.data.forEach(function (item) {
       treeDataTemp.push({title: item["name"], key: item["id"]})
+      tagDataTemp.push({label: item["name"], value: item["id"]})
     })
     setTreeData([{title: "所有分类", "key":0, "children": treeDataTemp}])
+    setTagData(tagDataTemp)
+
     const repsApi = await searchInterface(params);
     setTableData(repsApi?.data)
     return repsApi;
@@ -120,7 +130,17 @@ const Tag = () => {
     {
       title: '管理操作',
       valueType: 'option',
-      key: 'option',
+      dataIndex: 'option',
+      render: (text, record) => (
+        <Space>
+          <a >规则配置</a>
+          <a onClick={() => {
+            setApiRecord(record)
+            setApiAction("EDIT")
+            setApiVisible(true)
+          }}>修改接口</a>
+        </Space>
+      ),
     },
   ]
 
@@ -147,6 +167,20 @@ const Tag = () => {
           params={{ projectId: searchParams.get('id'), tagId: treeSelect}}
           columns={apiolumns}
           request={fetchApiData}
+          toolBarRender={() => [
+            <Button
+              key="addInterface"
+              icon={<PlusOutlined />}
+              onClick={() => {
+                setApiRecord({})
+                setApiAction("ADD")
+                setApiVisible(true)
+              }}
+              type="primary"
+            >
+              添加接口
+            </Button>,
+          ]}
         >
         </ProTable>
       </ProCard>
@@ -157,6 +191,15 @@ const Tag = () => {
         tagInfo={treeSelectInfo}
         projectId={searchParams.get('id')}
         reloadTagList={fetchApiData}
+      />
+      <UpsertApi
+        visible={apiVisible}
+        action={apiAction}
+        setVisible={setApiVisible}
+        refTable={refTable}
+        projectId={searchParams.get('id')}
+        apiInfo={apiRecord}
+        tagData={tagData}
       />
     </ProCard>
   )
