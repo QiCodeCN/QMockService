@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
       style={{
         background: 'none',
       }}
-      copyright={`${currentYear} 非典型程序员-Mock实战测试开发项目`}
+      copyright={`${currentYear} 非典型性程序员-Mock实战测试开发项目`}
       links={[
         {
           key: 'QMockService',

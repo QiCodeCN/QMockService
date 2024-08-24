@@ -12,8 +12,8 @@
         <result property="path" column="api_path" jdbcType="VARCHAR"/>
         <result property="enable" column="api_enable" jdbcType="INTEGER"/>
         <result property="desc" column="api_desc" jdbcType="VARCHAR"/>
-        <result property="responseCode" column="responseCode" jdbcType="INTEGER"/>
-        <result property="responseDefault" column="responseDefault" jdbcType="VARCHAR"/>
+        <result property="responseCode" column="api_response_code" jdbcType="INTEGER"/>
+        <result property="responseDefault" column="api_response_default" jdbcType="VARCHAR"/>
         <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
         <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
         <result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
@@ -41,4 +41,16 @@
             </if>
         </where>
     </select>
+
+    <insert id="insertMockInterface" parameterType="cn.daqi.mock.api.entity.MockInterfaceEntity">
+        insert into
+        mock_api(api_tag_id, api_project_id, api_title, api_method, api_path, api_response_code, api_response_default, api_desc, api_create_user, api_create_date)
+        values
+        (#{tagId}, #{projectId}, #{title}, #{method}, #{path}, #{responseCode}, #{responseDefault},#{desc}, #{createUser}, NOW())
+    </insert>
+
+    <update id="updateMockInterface" parameterType="cn.daqi.mock.api.entity.MockInterfaceEntity">
+        update mock_api set api_tag_id=#{tagId}, api_title=#{title}, api_method=#{method}, api_path=#{path},api_response_code=#{responseCode}, api_response_default=#{responseDefault}, api_desc=#{desc}, api_update_user=#{updateUser}, api_update_date=NOW()
+        where api_id = #{id}
+    </update>
 </mapper>

@@ -1,6 +1,7 @@
 package cn.daqi.mock.api.controller;
 
 import cn.daqi.mock.api.commons.RespResult;
+import cn.daqi.mock.api.entity.MockInterfaceEntity;
 import cn.daqi.mock.api.entity.requests.InterfaceSearchRequest;
 import cn.daqi.mock.api.service.MockInterfaceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class InterfaceController {
     }
 
     @PostMapping(value = "/interface/upsert")
-    public RespResult upsertInterface() {
-        return mockInterfaceService.upsertMockInterface();
+    public RespResult upsertInterface(@RequestBody MockInterfaceEntity interfaceEntity) {
+        return mockInterfaceService.upsertMockInterface(interfaceEntity);
     }
 
     @PostMapping(value = "/interface/remove")

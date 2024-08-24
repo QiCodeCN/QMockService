@@ -10,4 +10,8 @@ import java.util.List;
 public interface MockInterfaceMapper {
 
     List<MockInterfaceEntity> selectMockInterface(InterfaceSearchRequest reqs);
+
+    Integer insertMockInterface(MockInterfaceEntity entity);
+
+    Integer updateMockInterface(MockInterfaceEntity entity);
 }
