@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.daqi.mock.api.mapper.MockRuleMapper">
+    <resultMap type="cn.daqi.mock.api.entity.MockRuleEntity" id="RuleResponseMap">
+        <result property="id" column="rule_id" jdbcType="INTEGER"/>
+        <result property="apiId" column="rule_api_id" jdbcType="INTEGER"/>
+        <result property="title" column="rule_title" jdbcType="VARCHAR"/>
+        <result property="type" column="rule_type" jdbcType="VARCHAR"/>
+        <result property="enable" column="rule_enable" jdbcType="INTEGER"/>
+        <result property="requestFilter" column="rule_request_filter" jdbcType="VARCHAR"/>
+        <result property="responseBody" column="rule_response_body" jdbcType="INTEGER"/>
+        <result property="responseCode" column="rule_response_code" jdbcType="VARCHAR"/>
+        <result property="shell" column="rule_shell" jdbcType="VARCHAR"/>
+        <result property="createUser" column="rule_create_user" jdbcType="VARCHAR"/>
+        <result property="createDate" column="rule_create_date" jdbcType="TIMESTAMP"/>
+        <result property="updateUser" column="rule_update_user" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="rule_update_date" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="getMockRuleByApi" resultMap="RuleResponseMap" parameterType="cn.daqi.mock.api.entity.requests.MockRuleRequest">
+        select * from mock_rule
+        <where>
+            rule_api_id=#{apiId} and rule_enable != 2
+        </where>
+    </select>
+
+    <insert id="insertMockRule" parameterType="cn.daqi.mock.api.entity.MockRuleEntity">
+        insert into
+            mock_rule(rule_api_id, rule_title, rule_type, rule_enable, rule_request_filter, rule_response_body, rule_response_code, rule_create_user, rule_create_date)
+        values
+        (#{apiId}, #{title}, #{type}, #{enable}, #{requestFilter}, #{responseBody}, #{responseCode}, #{createUser}, NOW())
+    </insert>
+
+    <update id="updateMockRule" parameterType="cn.daqi.mock.api.entity.MockRuleEntity">
+        update mock_rule set rule_api_id=#{apiId}, rule_title=#{title}, rule_type=#{type},rule_enable=#{enable}, rule_request_filter=#{requestFilter},rule_response_body=#{responseBody}, rule_response_code=#{responseCode},rule_update_user=#{updateUser}, rule_update_date=NOW()
+        where rule_id = #{id}
+    </update>
+</mapper>

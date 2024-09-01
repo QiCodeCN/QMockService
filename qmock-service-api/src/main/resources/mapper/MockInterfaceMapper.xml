@@ -14,10 +14,10 @@
         <result property="desc" column="api_desc" jdbcType="VARCHAR"/>
         <result property="responseCode" column="api_response_code" jdbcType="INTEGER"/>
         <result property="responseDefault" column="api_response_default" jdbcType="VARCHAR"/>
-        <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
-        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
-        <result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
-        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="api_create_user" jdbcType="VARCHAR"/>
+        <result property="createDate" column="api_create_date" jdbcType="TIMESTAMP"/>
+        <result property="updateUser" column="api_update_user" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="api_update_date" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <select id="selectMockInterface" resultMap="InterfaceResponseMap" parameterType="cn.daqi.mock.api.entity.requests.InterfaceSearchRequest">
